@@ -1,0 +1,29 @@
+.p1{
+    font-size: 2cm;
+}
+
+.p2{
+    font-size: 12mm;
+}
+
+.p3{
+    font-size: 1in;
+}
+
+.p4{
+    font-size: 12px;
+}
+
+.p5{
+    font-size: 12pt;
+}
+
+.p6{
+    font-size: 5pc;
+}
+
+*{
+    background-color: #282828;
+    text-align: center;
+    color: whitesmoke;
+}

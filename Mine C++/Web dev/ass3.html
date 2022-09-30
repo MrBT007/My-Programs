@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h3>Alert Button</h3>
+        <button onclick="showAlertDialog()">Try</button>
+
+        <h3>Confirmation Dialog</h3>
+        <button onclick="showConfirmationDialog()">Confirm</button>
+        <p id="textConfirm"></p>
+
+        <h3>Prompt Dialog</h3>
+        <button onclick="showPromptDialog()">Try</button>
+        <p id="textPrompt"></p>
+
+    <script>
+        function showAlertDialog(){
+            alert("Not Allowed")
+        }
+        function showConfirmationDialog(){
+            let text = "Are you sure";
+            if(confirm(text) == true)
+            {
+                text = "Yes Pressed"
+            }
+            else 
+            {
+                text = "No Pressed"
+            }
+            document.getElementById("textConfirm").innerHTML = text;
+        }
+        function showPromptDialog(){
+            let text;
+            let personName = prompt("Please Enter Your Name: ");
+            if(personName === "")
+            {
+                text = "You Typed Nothing"
+            }
+            else if(personName === null){
+                text = "User Cancelled prompt"
+            }
+            
+            else{
+                text = "Welcome "+personName
+            }
+            document.getElementById("textPrompt").innerHTML = text;
+        }
+    </script>
+</body>
+</html>

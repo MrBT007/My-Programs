@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="text-align: center;">
+    <h2>Calculator</h2>
+    <table class="calc" style="margin: auto;">
+        <tr>
+            <td colspan="4"><input class="display" type="text" id="num1" disabled /></td>
+        </tr>
+        <tr>
+            <td colspan="4"><input class="display" type="text" id="operator" disabled /></td>
+        </tr>
+        <tr>
+            <td colspan="4"><input class="display" type="text" id="num2" disabled /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="0" onclick="fun('0')" /></td>
+            <td><input type="button" value="." onclick="fun('.')" /></td>
+            <td><input type="button" value="C" onclick="clearScreen()" id="clr" /></td>
+            <td><input type="button" value="/" onclick="op('/')" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" onclick="fun('7')" /></td>
+            <td><input type="button" value="8" onclick="fun('8')" /></td>
+            <td><input type="button" value="9" onclick="fun('9')" /></td>
+            <td><input type="button" value="x" onclick="op('x')" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" onclick="fun('4')" /></td>
+            <td><input type="button" value="5" onclick="fun('5')" /></td>
+            <td><input type="button" value="6" onclick="fun('6')" /></td>
+            <td><input type="button" value="-" onclick="op('-')" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="1" onclick="fun('1')" /></td>
+            <td><input type="button" value="2" onclick="fun('2')" /></td>
+            <td><input type="button" value="3" onclick="fun('3')" /></td>
+            <td><input type="button" value="+" onclick="op('+')" /></td>
+        </tr>
+    </table>
+
+    <script>
+        var num1dot = true;
+        var num2dot = true;
+        function fun(value) {
+
+            if (value == ".") {
+                if (num1dot == true) {
+                    if (document.getElementById('num1').value == "")
+                        document.getElementById('num1').value += "0.";
+                    else {
+                        document.getElementById('num1').value += "."
+                    }
+                    num1dot = false;
+                }
+                if (num2dot && document.getElementById("operator").value) {
+                    if (document.getElementById('num2').value == "")
+                        document.getElementById('num2').value += "0.";
+                    else {
+                        document.getElementById('num2').value += "."
+                    }
+                    num2dot = false;
+                }
+            }
+            else if (document.getElementById('operator').value) {
+                if (value == "." && num2dot == true) {
+                    document.getElementById('num2').value += ".";
+                }
+                else
+                    document.getElementById('num2').value += value;
+            }
+            else {
+                if (value == "." && num1dot == true) {
+                    document.getElementById('num1').value += ".";
+                }
+                else
+                    document.getElementById('num1').value += value;
+            }
+        }
+        function clearScreen() {
+            document.getElementById("num1").value = "";
+            document.getElementById("operator").value = "";
+            document.getElementById("num2").value = "";
+            num1dot = true;
+            num2dot = true;
+            document.getElementById("result").innerHTML = "";
+        }
+        function op(operator) {
+            if (document.getElementById('num1').value == "") {
+                document.getElementById('num1').value = 0;
+            }
+            document.getElementById("operator").value = operator;
+        }
+        function show() {
+            var num1 = document.getElementById("num1").value;
+            var op = document.getElementById("operator").value;
+            var num2 = document.getElementById("num2").value;
+            if (num1 && op && num2)
+                document.getElementById("result").innerHTML = num1 + " " + op + " " + num2;
+        }
+    </script>
+    <p id="result"></p>
+    <button onclick="show()">Show</button>
+</body>
+
+</html>

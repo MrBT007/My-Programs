@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let num1 = "";
+        let num2 = "";
+        let op = "";
+        function update(){
+            document.getElementById("num1").innerHTML=num1;
+            document.getElementById("op").innerHTML=op;
+            document.getElementById("num2").innerHTML=num2;
+        }
+        function press7(){
+            if(op===""){
+                num1+="7";
+            }else{
+                num2+="7";
+            }
+            update()
+
+        }
+        function press8(){
+            if(op===""){
+                num1+="8";
+            }else{
+                num2+="8";
+            }
+            update()
+
+        }
+        function press9(){
+            if(op===""){
+                num1+="9";
+            }else{
+                num2+="9";
+            }
+            update()
+
+        }
+        function press0(){
+            if(op===""){
+                num1+="0";
+            }else{
+                num2+="0";
+            }
+            update()
+
+        }
+        function press1(){
+            if(op===""){
+                num1+="1";
+            }else{
+                num2+="1";
+            }
+            update()
+
+        }
+        function press2(){
+            if(op===""){
+                num1+="2";
+            }else{
+                num2+="2";
+            }
+            update()
+
+        }
+        function press3(){
+            if(op===""){
+                num1+="3";
+            }else{
+                num2+="3";
+            }
+            update()
+
+        }
+        function press4(){
+            if(op===""){
+                num1+="4";
+            }else{
+                num2+="4";
+            }
+            update()
+
+        }
+        function press5(){
+            if(op===""){
+                num1+="5";
+            }else{
+                num2+="5";
+            }
+            update()
+
+        }
+        function press6(){
+            if(op===""){
+                num1+="6";
+            }else{
+                num2+="6";
+            }
+            update()
+
+        }
+        function pressPlus(){
+            if(num1==="" || num2!=""){
+                return;
+            }
+            op="+";
+            update()
+            }
+        function pressMinus(){
+            if(num1==="" || num2!=""){
+                return;
+            }
+            op="-";
+            update()
+        }
+        function pressDiv(){
+            if(num1==="" || num2!=""){
+                return;
+            }
+            op="/";
+            update()
+        }
+        function pressMul(){
+            if(num1==="" || num2!=""){
+                return;
+            }
+            op="*";
+            update()
+        }
+        function pressDot(){
+            if(op===""){
+                if(num1.includes(".")){
+                    return;
+                }else if(num1===""){
+                    num1="0.";
+                }
+                else{
+                    num1+=".";
+                }
+            }else{
+                if(num2.includes(".")){
+                    return;
+                }else if(num2===""){
+                    num2="0.";
+                }
+                else{
+                    num2+=".";
+                }
+            }
+            update()
+        }
+        function pressShow(){
+            if(num1==="" || num2==="" || op===""){
+                return;
+            }
+            document.getElementById("showSol").innerHTML=num1+" "+op+" "+num2;
+        }
+    </script>
+</head>
+<body>
+    <div id="display">
+        <p id="num1"></p>
+        <p id="op"></p>
+        <p id="num2"></p>
+    </div>
+    <hr>
+        <button id="7" onclick="press7()">7</button>
+        <button id="8" onclick="press8()">8</button>
+        <button id="9" onclick="press9()">9</button>
+        <button id="/" onclick="pressDiv()">/</button>
+        <hr>
+        <button id="4" onclick="press4()">4</button>
+        <button id="5" onclick="press5()">5</button>
+        <button id="6" onclick="press6()">6</button>
+        <button id="" onclick="pressMul()"></button>
+        <hr>
+        <button id="1" onclick="press1()">1</button>
+        <button id="2" onclick="press2()">2</button>
+        <button id="3" onclick="press3()">3</button>
+        <button id="-" onclick="pressMinus()">-</button>
+        <hr>
+        <button id="0" onclick="press0()">0</button>
+        <button id="." onclick="pressDot()">.</button>
+        <button id="+" onclick="pressPlus()">+</button>
+        <hr>
+        <button id="show" onclick="pressShow()">Show Solution</button>
+        <hr>
+        <div id="showSol"></div>
+</body>
+</html>

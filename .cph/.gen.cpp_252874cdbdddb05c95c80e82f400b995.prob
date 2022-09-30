@@ -1,0 +1,1 @@
+{"name":"Local: gen","url":"e:\\My programs\\gen.cpp","tests":[{"id":1663331764919,"input":"1\n5\nblue 1 2\ngreen 1 4\norange 2 5\nred 3 6\nyellow 3 7","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\My programs\\gen.cpp","group":"local","local":true}

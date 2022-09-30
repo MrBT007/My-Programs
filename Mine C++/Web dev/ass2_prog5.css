@@ -1,0 +1,17 @@
+span{
+    color: darkgoldenrod;
+    border: 1px solid  whitesmoke;
+}
+
+.extra span{
+    color: inherit;
+}
+.c1{
+    color: brown;
+}
+.c2{
+    color: chartreuse;
+}
+*{
+    background-color: #282828;
+}

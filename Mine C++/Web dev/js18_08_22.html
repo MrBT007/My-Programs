@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="text">PDEU-Gandhinagar</p>
+    <input type="button" value="Bold" id="b1" onclick="onoff()" ;></input>
+    <input type="button" value="Italic" id="b2" onclick="onoff_italic()" ;></input>
+    <input type="button" value="Color" id="b3" onclick="onoff_color()" ;></input>
+    <input type="button" value="Plus" id="b4" onclick="increase()" ;></input>
+    <input type="button" value="Minus" id="b5" onclick="decrease()" ;></input>
+</body>
+<script>
+    function onoff() {
+        currentValue = document.getElementById('b1').value;
+        console.log(currentValue)
+        if (currentValue == "Bold") {
+            document.getElementById("text").style.fontWeight = 'bold';
+            document.getElementById("b1").value = "Bold On"
+
+        } else if (currentValue == "Bold On") {
+            document.getElementById("b1").value = "Bold";
+            document.getElementById("text").style.fontWeight = "normal";
+        }
+    }
+    function onoff_italic() {
+        currentValue = document.getElementById('b2').value;
+        console.log(currentValue)
+        if (currentValue == "Italic") {
+            document.getElementById("text").style.fontStyle = 'Italic';
+            document.getElementById("b2").value = "Italic On"
+
+        } else if (currentValue == "Italic On") {
+            document.getElementById("b2").value = "Italic";
+            document.getElementById("text").style.fontStyle = "normal";
+        }
+    }
+    function onoff_color() {
+        currentValue = document.getElementById('b3').value;
+        console.log(currentValue)
+        if (currentValue == "Color") {
+            document.getElementById("text").style.color = "red";
+            document.getElementById("b3").value = "Color On"
+
+        } else if (currentValue == "Color On") {
+            document.getElementById("b3").value = "Color";
+            document.getElementById("text").style.color = "black";
+        }
+    }
+    function increase() {
+        txt = document.getElementById('text')
+        style = window.getComputedStyle(text, null).getPropertyValue('font-size');
+        currentSize = parseFloat(style);
+        txt.style.fontSize = (currentSize + 1) + 'px'
+
+    }
+    function decrease() {
+        txt = document.getElementById('text')
+        style = window.getComputedStyle(text, null).getPropertyValue('font-size');
+        currentSize = parseFloat(style);
+        txt.style.fontSize = (currentSize - 1) + 'px'
+
+    }
+</script>
+
+</html>

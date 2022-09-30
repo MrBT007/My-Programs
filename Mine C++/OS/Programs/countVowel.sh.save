@@ -1,0 +1,6 @@
+path = "/home/am
+echo "Total Vowels : "
+count=`wc --lines < $filename`
+echo count
+
+
