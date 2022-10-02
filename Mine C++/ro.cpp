@@ -7,6 +7,8 @@
 */
 
 #include <bits/stdc++.h>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
 
 #define ll long long
 #define ull unsigned long long
@@ -33,8 +35,12 @@
     cin.tie(NULL);                    \
     cout.tie(NULL)
 using namespace std;
+using namespace __gnu_pbds;
 
 /* ========== TEMPLATES ========= */
+
+template <class T>
+using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 template <class A>
 istream &operator>>(istream &in, vector<A> &a)
@@ -85,27 +91,29 @@ void google(int i)
 
 /* ========== YOUR CODE HERE ========= */
 
-/*
-      0
-    0 1 0
-  0 1 2 1 0
-0 1 2 3 2 1 0
-  0 1 2 1 0
-    0 1 0
-      0
-*/
+bool cmp(pair<int, int> &a, pair<int, int> &b)
+{
+    if (a.first == b.first)
+    {
+        return (a.second > b.second);
+    }
+    return a.first < b.first;
+}
 
 int main()
 {
     FASTIO;
-    int n;cin>>n;
-    for(int i = -n;i<=n;++i)
+    string s;cin>>s;
+    map<char,int>mp;
+    for(auto i:s)
     {
-        for(int j = 0;j<abs(i);++j)cout<<"  ";
-        for(int j = 0;j<n-abs(i);++j)cout<<j<<" ";
-        for(int j = n-abs(i);j>0;--j)cout<<j<<" ";
-        cout<<0<<"\n";
+        mp[i]++;
     }
+    int odd = 0;
+    for(auto i:mp) odd = odd + (i.second%2 == 1 ? 1 : 0);
+    
+    if(odd == 0 or odd%2 == 1)cout<<"First\n";
+    else cout<<"Second\n";
 
     return 0;
 }
