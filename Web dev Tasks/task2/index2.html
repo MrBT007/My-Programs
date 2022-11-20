@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let fnt = 14;
+        function bold(){
+            let x = document.getElementById("bold").innerText;
+            if(x==="Bold Off"){
+                document.getElementById("text").style.fontWeight="normal";
+                document.getElementById("bold").innerHTML = "Bold On";
+                
+            }
+            else{
+                
+                document.getElementById("text").style.fontWeight="bold";
+                document.getElementById("bold").innerHTML = "Bold Off";
+            }
+        }
+        function italic(){
+            let x = document.getElementById("italic").innerText;
+            if(x==="Italic Off"){
+                document.getElementById("text").style.fontStyle="normal";
+                document.getElementById("italic").innerHTML = "Italic On";
+                
+            }
+            else{
+                
+                document.getElementById("text").style.fontStyle="italic";
+                document.getElementById("italic").innerHTML = "Italic Off";
+            }
+        }
+        function color(){
+            let x = document.getElementById("color").innerText;
+            if(x==="No Color"){
+                document.getElementById("text").style.color="initial";
+                document.getElementById("color").innerHTML = "Color";
+                
+            }
+            else{
+                
+                document.getElementById("text").style.color="red";
+                document.getElementById("color").innerHTML = "No Color";
+            }
+        }
+        function inc(){
+            fnt = fnt+1;
+            document.getElementById("text").style.fontSize=fnt+'px';
+        }
+        function dec(){
+            if(fnt==1){
+                return;
+            }
+            fnt = fnt-1;
+            document.getElementById("text").style.fontSize=fnt+'px';
+        }
+    </script>
+</head>
+<body>
+    <div class="text" id="text">
+        PDEU-GANDHINAGAR
+    </div>
+    <button id="bold" onclick="bold()">Bold On</button>
+    <button id="italic" onclick="italic()">Italic On</button>
+    <button id="color" onclick="color()">Color</button>
+    <button id="inc" onclick="inc()">Increase font</button>
+    <button id="dec" onclick="dec()">Decrease font</button>
+</body>
+</html>

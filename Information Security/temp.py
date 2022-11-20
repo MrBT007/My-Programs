@@ -1,70 +1,26 @@
-import numpy as np
-from math import ceil
+def all_palin_subseq(s):
+    n = len(s)
+    res = set()
 
-def encrypt(text,key):
-    encry = ""
-    ascii_z = 122
-    column = len(key)
-    t = len(text)
-    text = text.replace(" ","")
-    row = ceil(len(text) / len(key)) 
+    for num in range(2**n, 2**(n+1)):
+
+        bin_num = bin(num)[3:]
+        # print(bin_num)
+        sub_seq = ""
+
+        for idx, ch in enumerate(bin_num):
+            if ch == '1':
+                sub_seq += s[idx]
+
+        if sub_seq and sub_seq == sub_seq[::-1]:
+            if len(sub_seq) != 1:
+                # print(sub_seq)
+                res.add(sub_seq)
     
-    for i in range((row*column) - len(text),0,-1):
-        text = text + chr(ascii_z-i+1)
-        
-    list = [i for i in text]
-    matrix = np.array(list).reshape(row,column)
-    
-    for i in range(len(key)):
-        pos = key.find(str(i+1))
-        encry += str("".join(matrix[:,pos]))
+    return len(list(res))
 
-    return encry,t
-
-def decrypt(text,key,len_text):
-    original_matrix =[]
-    decry = ""
-    column = len(key)
-    text = text.replace(" ","")
-    row = ceil(len(text) / len(key))
-        
-    list = [i for i in text]
-    matrix1 = np.array(list).reshape(column,row)
-        
-    for i in key:
-        i = int(i) - 1
-        original_matrix.append(matrix1[i])
-    
-    for j in range(len(original_matrix[0])):
-        for i in range(len(original_matrix)):
-            decry += original_matrix[i][j]
-            
-    while(len(decry)!=len_text):
-        decry = decry.rstrip(decry[-1])
-    return decry
-
-
-num = 2
-text = input("Enter Text: ")
-key =[]
-t=[len(text)]
-for i in range(num):
-    k = input("Enter Key: ")
-    key.append(k)
-
-    text,x = encrypt(text, str(key[i]))
-    t.append(x)
-
-print()
-print("*"*60)
-print()
-print("Encrypted Text : " ,text)
-
-
-for i in range(num,0,-1):
-    text = decrypt(text, str(key[i-1]),t[i])
-
-print("\nDecrypted Text : " ,text)
-print()
-print("*"*60)
-print()
+tc = int(input())
+for i in range(0,tc):
+    s = input()
+    print(all_palin_subseq(s))
+    tc=-1  

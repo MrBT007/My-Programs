@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <p id="demo">Light is off!</p>
+    <button onclick="document.getElementById('myImage').src='bulbon.gif',document.getElementById('demo').innerHTML = 'Light is on!'">Turn on the light</button>
+    <img id="myImage" src="bulboff.gif" style="width:100px">
+    <button onclick="document.getElementById('myImage').src='bulboff.gif',document.getElementById('demo').innerHTML = 'Light is off!'">Turn off the light</button>
+    <br>
+    <br>
+    <button style="padding: 5px; border: 2px solid black;margin-right: 15px;"onclick="document.getElementById('myImage').style.width='200px'">Increase the width</button>
+    <button style="padding: 5px; border: 2px solid black;margin-right: 15px;" onclick="document.getElementById('myImage').style.width='50px'" >Decrease the width</button>
+    <button style="padding: 5px; border: 2px solid rgb(0, 0, 0);margin-right: 15px;" onclick="document.getElementById('myImage').style.width='100px'" >original width</button>
+</body>
+
+</html>

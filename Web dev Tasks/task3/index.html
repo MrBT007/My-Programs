@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3</title>
+</head>
+
+<body>
+    <div id="d1">
+    <button id="btn1" class="btn" onclick="window.alert('Not Allowed') ">Alert</button><br><br>
+    <button id="btn3" class="btn" onclick="f2()">Confirm</button>
+    <p id="p2"></p>
+    <button id="btn2" class="btn" onclick="f1()">Prompt</button>
+    
+    <p id="p1"></p>
+    </div>
+</body>
+<script>
+    function f1(){
+        let person = prompt("Who are you", "Tushar");
+      if (person != null) {
+       document.getElementById("p1").innerHTML ="Welcome " + person ;
+  }
+  else{
+    document.getElementById("p1").innerHTML ="You pressed cancel" ;
+
+  }
+    }
+    function f2(){
+        if(confirm('Are you sure you want to log out??')){
+            document.getElementById('p2').innerHTML="YOU PRESSED YES";
+        }
+        else{
+            document.getElementById('p2').innerHTML="YOU PRESSED NO";
+        }
+    }
+</script>
+</html>

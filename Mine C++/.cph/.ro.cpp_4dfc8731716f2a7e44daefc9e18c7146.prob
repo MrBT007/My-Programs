@@ -1,1 +1,1 @@
-{"name":"Local: ro","url":"e:\\My-Programs\\Mine C++\\ro.cpp","tests":[{"id":1664600064006,"input":"abab\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\My-Programs\\Mine C++\\ro.cpp","group":"local","local":true}
+{"name":"Local: ro","url":"e:\\My-Programs\\Mine C++\\ro.cpp","tests":[{"id":1664903994356,"input":"1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\My-Programs\\Mine C++\\ro.cpp","group":"local","local":true}

@@ -1,3 +1,4 @@
+
 /*
     ॐ श्री गणेशाय नम:
     ॐ नमः शिवाय
@@ -80,23 +81,48 @@ void google(int i)
 
 /* ========== YOUR CODE HERE ========= */
 
+class Solution {
+public:
+    
+    string reverseWords(string s) 
+    {
+        int i = 0;
+        while(i<s.length() and s[i] == ' ')i++;
+        vector<string>wd;
+        while(i<s.length())
+        {
+            if(i<s.length() and s[i] == ' ')i++;
+            else if(i<s.length() and s[i] != ' ')
+            {
+                string t = "";
+                while(i<s.length() and s[i] != ' ')
+                {
+                    t+=s[i];
+                    i++;
+                }
+                // cout<<t<<" ";
+                wd.push_back(t);
+            }
+        }
+        cout<<wd<<"\n";
+        reverse(wd.begin(),wd.end());
+        string ans = "";
+        for(i = 0;i<wd.size();i++)
+        {
+            ans+=wd[i];
+            if(i!=wd.size()-1)ans+=' ';
+        }
+        return ans;
+    }
+};
+
 int main()
 {
     FASTIO;
-    int tc;cin>>tc;
-    for(int t = 1;t<=tc;t++)
-    {
-        multiset<int>st;
-        st.insert(1);
-        st.insert(3);
-        st.insert(2);
-        st.insert(1);
-        st.insert(3);
-        st.insert(2);
-
-        cout<<st;
-        //google(t);
-    }
-
+    Solution obj = Solution();
+    string ans = obj.reverseWords("the sky is blue");
+    cout<<"\n";
+    cout<<ans;
     return 0;
 }
+
