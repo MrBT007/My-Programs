@@ -78,18 +78,82 @@ void google(int i)
     cout << "Case #" << i << ": ";
 }
 
-/* ========== YOUR CODE HERE ========= */
+bool isNumber(string s) {
+	bool ans = true ;
+	for(auto &i : s) 
+		if(i < '0' || i > '9')
+			ans = false ;
 
-int main()
-{
-    FASTIO;
-    int tc;cin>>tc;
-    for(int t = 1;t<=tc;t++)
-    {
-        string s;cin>>s;
-        
-        //google(t);
-    }
+	return ans ;
+}
 
-    return 0;
+bool isLtrDig(char c) {
+	if(c >= '0' && c <= '9')
+		return true ;  
+	if(c >= 'a' && c <= 'z') 
+		return true ; 
+	if(c >= 'A' && c <= 'Z') 
+		return true;
+	return false;
+}
+
+bool isArithematic(char c) {
+	if (c == '+') 
+		return true; 
+	if(c == '-') 
+		return true; 
+	if(c == '*') 
+		return true;
+	if(c == '/') 
+		return true;
+
+	return false;
+}
+
+bool isBitwise(char c) {
+	return c == '&' || c == '|' || c == '^' || c == '!' ;
+}
+
+bool isIdentifier(string s) {
+	int n = (int) s.size() ;
+	if(n < 3)
+		return false ;
+
+	if(!isLtrDig(s[0]))
+		return false ;
+	if(!isArithematic(s[n-1]))
+		return false ;
+
+	for(int i = 1; i<n-1; i++)
+		if(!isBitwise(s[i]))
+			return false ;
+
+	return true ;
+}
+
+int main(){
+	fstream file;
+	string filename = "test.c" ;
+	file.open(filename.c_str()) ;
+
+	string word ;
+
+	vector<string> numbers, identifiers ;
+
+	while(file >> word) {
+		if(isNumber(word))
+			numbers.push_back(word) ;
+		else if(isIdentifier(word))
+			identifiers.push_back(word) ;
+	}    
+
+	cout << "The numbers are :\n" ;
+	for(auto &i : numbers)
+		cout << i << endl ;
+
+	cout << endl ;
+
+	cout << "The identifiers are:\n" ;
+	for(auto &i : identifiers)
+		cout << i << endl ;
 }

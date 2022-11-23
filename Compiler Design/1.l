@@ -1,7 +1,7 @@
 %{ 
 int n = 0 ;  
-%} 
-  
+%}
+
 %% 
   
 "while"|"if"|"else" {n++;printf("\t keywords : %s", yytext);}  

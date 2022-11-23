@@ -6,6 +6,7 @@
     Name : Bhut Tushar
 */
 
+#include <fstream>
 #include <bits/stdc++.h>
 #include <ext/pb_ds/tree_policy.hpp>
 #include <ext/pb_ds/assoc_container.hpp>
@@ -19,27 +20,34 @@
 #define ppb pop_back
 #define fi first
 #define se second
-#define no cout<<"NO"<<endl;
-#define yes cout<<"YES"<<endl;
+#define no cout << "NO" << endl;
+#define yes cout << "YES" << endl;
 #define mod 1000000007
 #define all(x) (x).begin(), (x).end()
 #define SORT(v) sort(all(v))
-#define REVSORT(v) sort(all(v),greater<int>())
+#define REVSORT(v) sort(all(v), greater<int>())
 #define MAX(v) max_element(all(v))
 #define MIN(v) min_element(all(v))
-#define rep(from,to) for(int i = from;i<=to;i++)
-#define rep_back(from,to) for(int i = from;i>=to;i--)
-#define take(v) rep(0,v.size())cin>>v[i];
-#define FASTIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+#define rep(from, to) for (int i = from; i <= to; i++)
+#define rep_back(from, to) for (int i = from; i >= to; i--)
+#define take(v) rep(0, v.size()) cin >> v[i];
+#define FASTIO                        \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL)
 using namespace std;
 using namespace __gnu_pbds;
 
 /* ========== TEMPLATES ========= */
 
-template <class T>using oset = tree<T, null_type, less<T>,rb_tree_tag,tree_order_statistics_node_update>;
+template <class T>
+using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-template<class A> istream& operator>>(istream& in, vector<A> &a){
-    for(A &i:a)in>>i;
+template <class A>
+istream &operator>>(istream &in, vector<A> &a)
+{
+    for (A &i : a)
+        in >> i;
     return in;
 }
 
@@ -54,19 +62,23 @@ ostream &operator<<(ostream &os, const T_container &v)
 
 bool isPowerOfTwo(int n)
 {
-    if(n==0)
-    return false;
+    if (n == 0)
+        return false;
     return (ceil(log2(n)) == floor(log2(n)));
 }
 
-bool is_prime(int n) {
-    if (n == 1) {
+bool is_prime(int n)
+{
+    if (n == 1)
+    {
         return false;
-}
+    }
 
     int i = 2;
-    while (i*i <= n) {
-        if (n % i == 0) {
+    while (i * i <= n)
+    {
+        if (n % i == 0)
+        {
             return false;
         }
         i += 1;
@@ -82,14 +94,26 @@ void google(int i)
 
 int main()
 {
-    FASTIO;
-    int tc;cin>>tc;
-    for(int t = 1;t<=tc;t++)
-    {
-        string s;cin>>s;
-        
-        //google(t);
-    }
+    string name = "tushar";
+    string surname = "bhut";
+    ifstream filein("imput.txt");
+    ofstream fileout("output.txt");
+    string strTemp;
 
+    int count = 0;
+    while (filein >> strTemp)
+    {
+        if (strTemp == name)
+        {
+            count++;
+            strTemp = surname;
+        }
+        strTemp += " ";
+        fileout << strTemp;
+        cout<<strTemp<<" ";
+    }
+    cout<<"\nTotal count of name : "<<count<<"\n";
+    filein.close();
+    fileout.close();
     return 0;
 }
