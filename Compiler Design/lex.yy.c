@@ -442,9 +442,9 @@ char *yytext;
 #include<stdio.h>
 #include<string.h>
 
-char replace_with [] = "bhut";
+char surname [] = "bhut";
 
-char replace [] ="tushar";
+char name [] ="tushar";
 
 int count = 0;
 
@@ -736,9 +736,9 @@ YY_RULE_SETUP
     //     str[j] = tolower(str[j]);
     //     j++;
     // }
-    if(strcmp(yytext, replace)==0){
+    if(strcasecmp(yytext, name)==0){
         count++;
-        fprintf(yyout, "%s", replace_with);
+        fprintf(yyout, "%s", surname);
         }
     else
         fprintf(yyout, "%s", yytext);}
@@ -1767,12 +1767,10 @@ int yywrap()
 }
 
 int main()
-
 {
     extern FILE *yyin, *yyout;
     yyin=fopen("imput.txt", "r");
     yyout=fopen("output.txt", "w");
     yylex();
     printf("tushar was found: %d times\n", count);
-
 }

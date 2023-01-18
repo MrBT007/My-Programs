@@ -1,3 +1,4 @@
+
 /*
     ॐ श्री गणेशाय नम:
     ॐ नमः शिवाय
@@ -52,44 +53,36 @@ ostream &operator<<(ostream &os, const T_container &v)
     return os;
 }
 
-bool isPowerOfTwo(int n)
-{
-    if(n==0)
-    return false;
-    return (ceil(log2(n)) == floor(log2(n)));
-}
 
-bool is_prime(int n) {
-    if (n == 1) {
-        return false;
-}
+std::vector<int> getContinuousLines(const std::vector<std::vector<int>>& A) {
+    // Initialize the result array with all zeros
+    std::vector<int> B(A.size(), 0);
 
-    int i = 2;
-    while (i*i <= n) {
-        if (n % i == 0) {
-            return false;
+    // Loop through the lines
+    for (int i = 0; i < A.size(); ++i) {
+        // Get the coordinates of the line
+        int x1 = A[i][0], y1 = A[i][1], x2 = A[i][2], y2 = A[i][3];
+        // Check if the line is vertical or horizontal
+        if (x1 == x2) { // Vertical line
+            // Increment B[j] for all j such that y1 <= j < y2
+            for (int j = y1; j < y2; ++j) {
+                ++B[i];
+            }
+        } else if (y1 == y2) { // Horizontal line
+            // Increment B[j] for all j such that x1 <= j < x2
+            for (int j = x1; j < x2; ++j) {
+                ++B[i];
+            }
         }
-        i += 1;
-    }
-    return true;
-}
-void google(int i)
-{
-    cout << "Case #" << i << ": ";
-}
-
-/* ========== YOUR CODE HERE ========= */
-
-int main()
-{
-    FASTIO;
-    int tc;cin>>tc;
-    for(int t = 1;t<=tc;t++)
-    {
-        string s;cin>>s;
-        
-        //google(t);
     }
 
-    return 0;
+    return B;
+}
+  
+int main() 
+{ 
+    vector<vector<int>>arr = {{4,7},{1,3}}; 
+    
+    cout<<getContinuousLines(arr);
+    return 0; 
 }

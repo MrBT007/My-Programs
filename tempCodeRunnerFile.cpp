@@ -1,4 +1,3 @@
-
 /*
     ॐ श्री गणेशाय नम:
     ॐ नमः शिवाय
@@ -92,47 +91,18 @@ void google(int i)
 
 /* ========== YOUR CODE HERE ========= */
 
-class Solution
+vector<pair<pair<int, int>, pair<int, int>>> traversal_path_of_source;
+vector<pair<pair<int, int>, pair<int, int>>> traversal_path_of_goal;
+map<pair<int, int>, set<pair<int, int>>> mp;
+
+pair<int, int> visGoal = {-1, -1}, visSrc = {-1, -1};
+
+bool bfs(int jug1, int jug2, pair<int, int> goal, map<pair<int, int>, bool> &visited_by_source, map<pair<int, int>, bool> &visited_by_goal)
 {
-public:
+    if (visited_by_source[{jug1, jug2}])
+        return false;
 
-    void addString(string &ans, string &tmp)
-    {
-        
-    }
-    string multiply(string n1, string n2)
-    {
-        if (n2.length() > n1.length())
-            swap(n1, n2);
-
-        int i2 = n2.length() - 1;
-        int carry = 0;
-        string ans = "";
-        for (; i2 >= 0; i2--)
-        {
-            string tmp = "";
-            int num2 = (n2[i2] - '0');
-            for (int i1 = n1.length() - 1; i1 >= 0; i1--)
-            {
-                int multiplication = (n1[i1] - '0') * num2;
-                int num = (carry + multiplication) % 10;
-                if (carry + multiplication >= 10)
-                {
-                    carry = (carry + multiplication) / 10;
-                }
-                tmp += to_string(num);
-            }
-            addString(ans,tmp);
-        }
-    }
-};
-
-int main()
-{
-    FASTIO;
-    Solution obj = Solution();
-    string ans = obj.multiply("123", "456");
-    cout << "\n";
-    cout << ans;
-    return 0;
-}
+    // visited_by_source[{0, 0}] = true;
+    queue<pair<int, int>> q_of_source;
+    queue<pair<int, int>> q_of_goal;
+    q_of_source.push({0, 0});

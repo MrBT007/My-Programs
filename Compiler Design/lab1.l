@@ -20,7 +20,7 @@ int count = 0;
     //     str[j] = tolower(str[j]);
     //     j++;
     // }
-    if(strcmp(yytext, name)==0){
+    if(strcasecmp(yytext, name)==0){
         count++;
         fprintf(yyout, "%s", surname);
         }

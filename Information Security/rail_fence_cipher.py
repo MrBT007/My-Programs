@@ -12,6 +12,8 @@ def encrypt(text, key):
     currentidx = 0
     totalsizeofmatrix = (max_partition - (len(text) %
                          max_partition))+len(text)
+    print(totalsizeofmatrix)
+    print(totrow*max_partition)
     matrix = []
     for i in range(0, totrow):
         temp = []
