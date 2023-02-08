@@ -1,135 +1,162 @@
-/*
-    ॐ श्री गणेशाय नम:
-    ॐ नमः शिवाय
-    જય ભૂત દાદા
-
-    Name : Bhut Tushar
-*/
-
 #include <bits/stdc++.h>
-
-#define ll long long
-#define ull unsigned long long
-#define sz size()
-#define vll vector<ll>
-#define mp make_pair
-#define pb push_back
-#define ppb pop_back
-#define fi first
-#define se second
-#define mod 1000000007
-#define all(i) (i).begin(), (i).end()
-#define SORT(v) sort(all(v))
-#define REVSORT(v) sort(all(v), greater<int>())
-#define MAX(v) max_element(all(v))
-#define MIN(v) min_element(all(v))
-#define rep(from, to) for (int i = from; i <= to; i++)
-#define rep_back(from, to) for (int i = from; i >= to; i--)
-#define take(v) rep(0, v.size()) cin >> v[i];
-#define FASTIO                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL)
+#define n 3
+const bool SUCCESS = true;
 using namespace std;
+using i64 = long long int;
 
-/* ========== TEMPLATES ========= */
-
-template <class A>
-istream &operator>>(istream &in, vector<A> &a)
+class state
 {
-    for (A &i : a)
-        in >> i;
-    return in;
-}
-
-template <typename T_container, typename T = typename enable_if<!is_same<T_container, string>::value, typename T_container::value_type>::type>
-ostream &operator<<(ostream &os, const T_container &v)
-{
-    string sep;
-    for (const T &i : v)
-        os << sep << i, sep = " ";
-    return os;
-}
-
-bool isPowerOfTwo(int n)
-{
-    if (n == 0)
-        return false;
-    return (ceil(log2(n)) == floor(log2(n)));
-}
-
-bool is_prime(int n)
-{
-    if (n == 1)
+public:
+    int board[n][n], g, f;
+    state *came_from;
+    state()
     {
-        return false;
+        g = 0;
+        f = 0;
+        came_from = NULL;
     }
-
-    int i = 2;
-    while (i * i <= n)
+    static int heuristic(state from, state to)
     {
-        if (n % i == 0)
+        int ret = 0;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                if (from.board[i][j] != to.board[i][j])
+                    ret++;
+        return ret;
+    }
+    bool operator==(state a)
+    {
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                if (this->board[i][j] != a.board[i][j])
+                    return false;
+        return true;
+    }
+    void print()
+    {
+        for (int i = 0; i < n; i++)
         {
-            return false;
+            for (int j = 0; j < n; j++)
+                cout << board[i][j] << " ";
+            cout << endl;
         }
-        i += 1;
+        cout << "g = " << g << " | f = " << f << endl;
     }
-    return true;
-}
-void google(int i)
+};
+
+vector<state> output;
+bool lowerF(state a, state b)
 {
-    cout << "Case #" << i << ": ";
+    return a.f < b.f;
 }
 
-/* ========== YOUR CODE HERE ========= */
-
-bool sort1(pair<string, pair<int, int>> &i, pair<string, pair<int, int>> &j)
+bool isinset(state a, vector<state> b)
 {
-    if (i.second.first != j.second.first)
-        return (i.second.first < j.second.first);
-    else
-        return (i.second.second < j.second.second);
+    for (int i = 0; i < b.size(); i++)
+        if (a == b[i])
+            return true;
+    return false;
 }
-bool sort2(pair<string, pair<int, int>> &i, pair<string, pair<int, int>> &j)
+int c = 0;
+void addNeighbor(state current, state goal, int newi, int newj, int posi, int posj, vector<state> &openset, vector<state> closedset)
 {
-    if (i.first != j.first)
-        return (i.first < j.first);
-    else
-        return (i.second.second < j.second.second);
+    state newstate = current;
+    swap(newstate.board[newi][newj], newstate.board[posi][posj]);
+    if (!isinset(newstate, closedset) && !isinset(newstate, openset))
+    {
+        newstate.g = current.g + 1;
+        newstate.f = newstate.g + state ::heuristic(newstate, goal);
+        state *temp = new state();
+        *temp = current;
+        newstate.came_from = temp;
+        openset.push_back(newstate);
+    }
+}
+
+
+bool reconstruct_path(state current, vector<state> &came_from)
+{
+    cout<<"Generating path ...\n";
+    state *temp = &current;
+    while (temp != NULL)
+    {
+        came_from.push_back(*temp);
+        temp = temp->came_from;
+    }
+    return SUCCESS;
+}
+
+
+void neighbors(state current, state goal, vector<state> &openset, vector<state> &closedset)
+{
+    // cout<<"Adding Neighbours ...\n";
+    int i, j, posi, posj;
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            if (current.board[i][j] == 0)
+            {
+                posi = i;
+                posj = j;
+                break;
+            }
+    i = posi, j = posj;
+    if (i - 1 >= 0)
+        addNeighbor(current, goal, i - 1, j, posi, posj, openset, closedset);
+    if (i + 1 < n)
+        addNeighbor(current, goal, i + 1, j, posi, posj, openset, closedset);
+    if (j + 1 < n)
+        addNeighbor(current, goal, i, j + 1, posi, posj, openset, closedset);
+    if (j - 1 >= 0)
+        addNeighbor(current, goal, i, j - 1, posi, posj, openset, closedset);
+}
+bool astar(state start, state goal)
+{
+    cout<<"Finding path ...\n";
+    vector<state> openset;
+    vector<state> closedset;
+    state current;
+    start.g = 0;
+    start.f = start.g + state ::heuristic(start, goal);
+    openset.push_back(start);
+    while (!openset.empty())
+    {
+        sort(openset.begin(), openset.end(), lowerF);
+        current = openset[0];
+        // cout<<current.f<<"\n";
+        // cout<<"********\n";
+        // for(int i = 0;i<n;i++)
+        // {
+        //     for(int j = 0;j<n;j++)cout<<current.board[i][j]<<" ";
+        //     cout<<"\n";
+        // }
+        // cout<<"\n";
+        if (current == goal)
+            return reconstruct_path(current, output);
+        openset.erase(openset.begin());
+        closedset.push_back(current);
+        neighbors(current, goal, openset, closedset);
+    }
+    return !SUCCESS;
 }
 
 int main()
 {
-    FASTIO;
-    int tc;
-    cin >> tc;
-    for (int t = 1; t <= tc; t++)
+    state start, goal;
+    freopen("in.txt", "r", stdin);
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            cin >> start.board[i][j];
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            cin >> goal.board[i][j];
+
+    if (astar(start, goal) == SUCCESS)
     {
-        google(t);
-        ll n;
-        cin >> n;
-        vector<pair<string, pair<int, int>>> mp;
-        vector<pair<string, pair<int, int>>> temp;
-        for (int i = 0; i < n; i++)
-        {
-            string s;
-            cin >> s;
-            int d, u;
-            cin >> d >> u;
-            mp.push_back({s, {d, u}});
-        }
-        temp = mp;
-        sort(mp.begin(), mp.end(), sort2);
-        sort(temp.begin(), temp.end(), sort1);
-        int ans = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (temp[i] == mp[i])
-            {
-                ans++;
-            }
-        }
-        cout << ans << "\n";
+        for (int i = output.size() - 1; i >= 0; i--)
+            output[i].print();
+        cout << "SUCKsess" << endl;
     }
+    else
+        cout << "FAIL" << endl;
     return 0;
 }

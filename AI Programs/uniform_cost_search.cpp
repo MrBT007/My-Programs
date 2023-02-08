@@ -1,14 +1,4 @@
-/*
-    ॐ श्री गणेशाय नम:
-    ॐ नमः शिवाय
-    જય ભૂત દાદા
-
-    Name : Bhut Tushar
-*/
-
 #include <bits/stdc++.h>
-#include <ext/pb_ds/tree_policy.hpp>
-#include <ext/pb_ds/assoc_container.hpp>
 
 #define ll long long
 #define ull unsigned long long
@@ -35,59 +25,6 @@
     cin.tie(NULL);                    \
     cout.tie(NULL)
 using namespace std;
-using namespace __gnu_pbds;
-
-/* ========== TEMPLATES ========= */
-
-template <class T>
-using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
-template <class A>
-istream &operator>>(istream &in, vector<A> &a)
-{
-    for (A &i : a)
-        in >> i;
-    return in;
-}
-
-template <typename T_container, typename T = typename enable_if<!is_same<T_container, string>::value, typename T_container::value_type>::type>
-ostream &operator<<(ostream &os, const T_container &v)
-{
-    string sep;
-    for (const T &x : v)
-        os << sep << x, sep = " ";
-    return os;
-}
-
-bool isPowerOfTwo(int n)
-{
-    if (n == 0)
-        return false;
-    return (ceil(log2(n)) == floor(log2(n)));
-}
-
-bool is_prime(int n)
-{
-    if (n == 1)
-    {
-        return false;
-    }
-
-    int i = 2;
-    while (i * i <= n)
-    {
-        if (n % i == 0)
-        {
-            return false;
-        }
-        i += 1;
-    }
-    return true;
-}
-void google(int i)
-{
-    cout << "Case #" << i << ": ";
-}
 
 /* ========== YOUR CODE HERE ========= */
 
@@ -146,7 +83,6 @@ int main()
 {
     FASTIO;
 
-    // edges - cost
     map<string, vector<string>> edges;
 
     edges["a"].push_back("b");
@@ -166,11 +102,7 @@ int main()
     edges["f"].push_back("d");
     edges["e"].push_back("g3");
 
-    // for(auto i:edges)
-    // {
-    //     for(auto j:i.second)
-    //         cout<<i.first<<" -> "<<j<<"\n";
-    // }
+    //edges-cost
     map<pair<string, string>, int> cost;
 
     cost[{"a", "b"}] = 3;
@@ -256,9 +188,10 @@ int main()
     // cost[{"g3","f"}] = 2;
 
     string source = "s";
-    string goal = "g3";
+    string goal = "g2";
     bfs(edges, source, cost,goal);
 
+    cout<<"Path : ";
     vector<string> path;
     while (goal != source)
     {
