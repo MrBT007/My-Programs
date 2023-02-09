@@ -50,21 +50,21 @@ ostream &operator<<(ostream &os, const T_container &v)
     return os;
 }
 
-bool isPowerOfTwo(int n)
+bool isPowerOfTwo(int node)
 {
-    if(n==0)
+    if(node==0)
     return false;
-    return (ceil(log2(n)) == floor(log2(n)));
+    return (ceil(log2(node)) == floor(log2(node)));
 }
 
-bool is_prime(int n) {
-    if (n == 1) {
+bool is_prime(int node) {
+    if (node == 1) {
         return false;
 }
 
     int i = 2;
-    while (i*i <= n) {
-        if (n % i == 0) {
+    while (i*i <= node) {
+        if (node % i == 0) {
             return false;
         }
         i += 1;
@@ -110,8 +110,8 @@ map<string, int> H_dist = {
         {"F", 4},
         {"G", 0}};
 
-int heuristic(string n) {
-    return H_dist[n];
+int heuristic(string node) {
+    return H_dist[node];
 }
 
 void aStarAlgo(string start_node, string stop_node) {
@@ -124,31 +124,31 @@ void aStarAlgo(string start_node, string stop_node) {
     parents[start_node] = start_node;
 
     while (open_set.size() > 0) {
-        string n;
+        string node;
         int min_score = INT_MAX;
 
-        for (auto v : open_set) {
-            int score = nodes_with_values[v].g + heuristic(v);
+        for (auto i : open_set) {
+            int score = nodes_with_values[i].g + heuristic(i);
             if (score < min_score) {
-                n = v;
+                node = i;
                 min_score = score;
             }
         }
 
-        if (n.empty()) {
+        if (node.empty()) {
             cout << "Path does not exist!" << endl;
             return;
         }
 
-        if (n == stop_node) {
+        if (node == stop_node) {
             vector<string> path;
-            while (parents[n] != n) {
-                path.push_back(n);
-                n = parents[n];
+            while (parents[node] != node) {
+                path.push_back(node);
+                node = parents[node];
             }
             path.push_back(start_node);
             reverse(all(path));
-            cout<<"Cost : "<<nodes_with_values[stop_node].g<<"\n";
+            cout<<"Cost : "<<nodes_with_values[stop_node].g<<"\node";
             cout << "Path found: ";
             for (auto s : path)
                 cout << s << " ";
@@ -156,22 +156,23 @@ void aStarAlgo(string start_node, string stop_node) {
             return;
         }
 
-        open_set.erase(n);
-        closed_set.insert(n);
+        open_set.erase(node);
+        closed_set.insert(node);
 
-        vector<pair<string, int>> neighbors = get_neighbors(n);
+        vector<pair<string, int>> neighbors = get_neighbors(node);
         if (neighbors.empty())
             continue;
 
         for (auto m : neighbors) {
             if (open_set.count(m.first) == 0 && closed_set.count(m.first) == 0) {
                 open_set.insert(m.first);
-                parents[m.first] = n;
-                nodes_with_values[m.first].g = nodes_with_values[n].g + m.second;
+                parents[m.first] = node;
+                nodes_with_values[m.first].g = nodes_with_values[node].g + m.second;
             } else {
-                if (nodes_with_values[m.first].g > nodes_with_values[n].g + m.second) {
-                    nodes_with_values[m.first].g = nodes_with_values[n].g + m.second;
-                    parents[m.first] = n;
+                if (nodes_with_values[m.first].g > nodes_with_values[node].g + m.second) {
+                    nodes_with_values[m.first].g = nodes_with_values[node].g + m.second;
+                    parents[m.first] = node;
+                    // if value is less than the visited then we will erase it from closed set and add it in open set
                     if (closed_set.count(m.first) > 0) {
                         open_set.insert(m.first);
                         closed_set.erase(m.first);

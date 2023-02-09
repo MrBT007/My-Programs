@@ -38,7 +38,7 @@ struct ComparePairs
 
 map<string, string> parent;
 
-void bfs(map<string, vector<string>> &edges, string source, map<pair<string, string>, int> &cost,string goal)
+void bfs(map<string, vector<string>> &edges, string source, map<pair<string, string>, int> &cost_edges,string goal)
 {
     priority_queue<pair<int, string>, vector<pair<int, string>>, ComparePairs> pq;
 
@@ -60,8 +60,7 @@ void bfs(map<string, vector<string>> &edges, string source, map<pair<string, str
         // cout<<top.second<<"\n";
         if (top.second == goal)
         {
-            // parent["g3"] = top.second;
-            cout << "Minimum cost : " << top.first << "\n";
+            cout << "Minimum cost_edges : " << top.first << "\n";
             return;
         }
 
@@ -69,11 +68,11 @@ void bfs(map<string, vector<string>> &edges, string source, map<pair<string, str
 
         for (auto i : edges[top.second])
         {
-            if (!visited[i] and costOfAllNode[i] > costOfAllNode[top.second]+cost[{top.second,i}])
+            if (!visited[i] and costOfAllNode[i] > costOfAllNode[top.second]+cost_edges[{top.second,i}])
             {
                 parent[i] = top.second;
-                costOfAllNode[i] = costOfAllNode[top.second]+cost[{top.second,i}];
-                pq.push({top.first + cost[{top.second, i}], i});
+                costOfAllNode[i] = costOfAllNode[top.second]+cost_edges[{top.second,i}];
+                pq.push({top.first + cost_edges[{top.second, i}], i});
             }
         }
     }
@@ -102,25 +101,25 @@ int main()
     edges["f"].push_back("d");
     edges["e"].push_back("g3");
 
-    //edges-cost
-    map<pair<string, string>, int> cost;
+    //edges-cost_edges
+    map<pair<string, string>, int> cost_edges;
 
-    cost[{"a", "b"}] = 3;
-    cost[{"a", "g1"}] = 9;
-    cost[{"b", "a"}] = 2;
-    cost[{"b", "c"}] = 1;
-    cost[{"s", "a"}] = 5;
-    cost[{"s", "b"}] = 9;
-    cost[{"s", "d"}] = 6;
-    cost[{"c", "s"}] = 6;
-    cost[{"c", "g2"}] = 5;
-    cost[{"c", "f"}] = 7;
-    cost[{"d", "s"}] = 1;
-    cost[{"d", "e"}] = 2;
-    cost[{"d", "c"}] = 2;
-    cost[{"e", "g3"}] = 7;
-    cost[{"f", "g3"}] = 8;
-    cost[{"f", "d"}] = 2;
+    cost_edges[{"a", "b"}] = 3;
+    cost_edges[{"a", "g1"}] = 9;
+    cost_edges[{"b", "a"}] = 2;
+    cost_edges[{"b", "c"}] = 1;
+    cost_edges[{"s", "a"}] = 5;
+    cost_edges[{"s", "b"}] = 9;
+    cost_edges[{"s", "d"}] = 6;
+    cost_edges[{"c", "s"}] = 6;
+    cost_edges[{"c", "g2"}] = 5;
+    cost_edges[{"c", "f"}] = 7;
+    cost_edges[{"d", "s"}] = 1;
+    cost_edges[{"d", "e"}] = 2;
+    cost_edges[{"d", "c"}] = 2;
+    cost_edges[{"e", "g3"}] = 7;
+    cost_edges[{"f", "g3"}] = 8;
+    cost_edges[{"f", "d"}] = 2;
 
 
     //Undirected Graph
@@ -156,40 +155,40 @@ int main()
     // edges["f"].push_back("g3");
     // edges["g3"].push_back("f");
 
-    // cost[{"a","b"}] = 1;
-    // cost[{"b","a"}] = 1;
-    // cost[{"a","c"}] = 3;
-    // cost[{"c","a"}] = 3;
-    // cost[{"a","d"}] = 2;
-    // cost[{"d","a"}] = 2;
-    // cost[{"b","d"}] = 4;
-    // cost[{"d","b"}] = 4;
-    // cost[{"b","e"}] = 1;
-    // cost[{"e","b"}] = 1;
-    // cost[{"c","d"}] = 2;
-    // cost[{"d","c"}] = 2;
-    // cost[{"c","g1"}] = 3;
-    // cost[{"g1","c"}] = 3;
-    // cost[{"d","e"}] = 1;
-    // cost[{"e","d"}] = 1;
-    // cost[{"d","f"}] = 1;
-    // cost[{"f","d"}] = 1;
-    // cost[{"d","g1"}] = 5;
-    // cost[{"g1","d"}] = 5;
-    // cost[{"e","g2"}] = 2;
-    // cost[{"g2","e"}] = 2;
-    // cost[{"e","f"}] = 3;
-    // cost[{"f","e"}] = 3;
-    // cost[{"f","g1"}] = 2;
-    // cost[{"g1","f"}] = 2;
-    // cost[{"f","g2"}] = 2;
-    // cost[{"g2","f"}] = 2;
-    // cost[{"f","g3"}] = 2;
-    // cost[{"g3","f"}] = 2;
+    // cost_edges[{"a","b"}] = 1;
+    // cost_edges[{"b","a"}] = 1;
+    // cost_edges[{"a","c"}] = 3;
+    // cost_edges[{"c","a"}] = 3;
+    // cost_edges[{"a","d"}] = 2;
+    // cost_edges[{"d","a"}] = 2;
+    // cost_edges[{"b","d"}] = 4;
+    // cost_edges[{"d","b"}] = 4;
+    // cost_edges[{"b","e"}] = 1;
+    // cost_edges[{"e","b"}] = 1;
+    // cost_edges[{"c","d"}] = 2;
+    // cost_edges[{"d","c"}] = 2;
+    // cost_edges[{"c","g1"}] = 3;
+    // cost_edges[{"g1","c"}] = 3;
+    // cost_edges[{"d","e"}] = 1;
+    // cost_edges[{"e","d"}] = 1;
+    // cost_edges[{"d","f"}] = 1;
+    // cost_edges[{"f","d"}] = 1;
+    // cost_edges[{"d","g1"}] = 5;
+    // cost_edges[{"g1","d"}] = 5;
+    // cost_edges[{"e","g2"}] = 2;
+    // cost_edges[{"g2","e"}] = 2;
+    // cost_edges[{"e","f"}] = 3;
+    // cost_edges[{"f","e"}] = 3;
+    // cost_edges[{"f","g1"}] = 2;
+    // cost_edges[{"g1","f"}] = 2;
+    // cost_edges[{"f","g2"}] = 2;
+    // cost_edges[{"g2","f"}] = 2;
+    // cost_edges[{"f","g3"}] = 2;
+    // cost_edges[{"g3","f"}] = 2;
 
     string source = "s";
     string goal = "g2";
-    bfs(edges, source, cost,goal);
+    bfs(edges, source, cost_edges,goal);
 
     cout<<"Path : ";
     vector<string> path;

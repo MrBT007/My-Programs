@@ -100,113 +100,6 @@ pair<int, int> visGoal = {-1, -1}, visSrc = {-1, -1};
 
 map<pair<int, int>, set<pair<int, int>>> generated_tree;
 
-bool bfs(int jug1, int jug2, pair<int, int> goal, map<pair<int, int>, bool> &visited)
-{
-    if (visited[{jug1, jug2}])
-        return false;
-
-    // visited[{0, 0}] = true;
-    queue<pair<int, int>> q;
-    q.push({0, 0});
-
-    while (!q.empty())
-    {
-        pair<int, int> top = q.front();
-        q.pop();
-
-        if (!visited[top])
-        {
-            visited[top] = true;
-            // cout << top.first << " " << top.second << "\n";
-            // fill
-            if (top.first < jug1)
-            {
-                generated_tree[top].insert({jug1, top.second});
-                // generated_tree[{jug1, top.second}].insert(top);
-                if (!visited[{jug1, top.second}])
-                {
-                    q.push({jug1, top.second});
-                    // cout<<jug1<<" "<<top.second<<"\n";
-                }
-            }
-            if (top.second < jug2)
-            {
-                generated_tree[top].insert({top.first, jug2});
-                // generated_tree[{top.first, jug2}].insert(top);
-                if (!visited[{top.first, jug2}])
-                {
-                    q.push({top.first, jug2});
-                    // cout<<top.first<<" "<<jug2<<"\n";
-                }
-            }
-
-            // empty
-            if (top.first > 0)
-            {
-                generated_tree[top].insert({0, top.second});
-                // generated_tree[{0, top.second}].insert(top);
-                if (!visited[{0, top.second}])
-                {
-                    q.push({0, top.second});
-                }
-            }
-            if (top.second > 0)
-            {
-                generated_tree[top].insert({top.first, 0});
-                // generated_tree[{top.first, 0}].insert(top);
-                if (!visited[{top.first, 0}])
-                {
-                    q.push({top.first, 0});
-                }
-            }
-
-            // transfer
-            if (top.first > 0 and top.second < jug2)
-            {
-                if (top.first + top.second <= jug2)
-                {
-                    generated_tree[top].insert({0, top.first + top.second});
-                    // generated_tree[{0, top.first + top.second}].insert(top);
-                    if (!visited[{0, top.first + top.second}])
-                    {
-                        q.push({0, top.first + top.second});
-                    }
-                }
-                else
-                {
-                    generated_tree[top].insert({top.first + top.second - jug2, jug2});
-                    // generated_tree[{top.first + top.second - jug2, jug2}].insert(top);
-                    if (!visited[{top.first + top.second - jug2, jug2}])
-                    {
-                        q.push({top.first + top.second - jug2, jug2});
-                    }
-                }
-            }
-            if (top.second > 0 and top.first < jug1)
-            {
-                if (top.first + top.second <= jug1)
-                {
-                    generated_tree[top].insert({top.first + top.second, 0});
-                    // generated_tree[{top.first + top.second, 0}].insert(top);
-                    if (!visited[{top.first + top.second, 0}])
-                    {
-                        q.push({top.first + top.second, 0});
-                    }
-                }
-                else
-                {
-                    generated_tree[top].insert({jug1, top.first + top.second - jug1});
-                    // generated_tree[{jug1, top.first + top.second - jug1}].insert(top);
-                    if (!visited[{jug1, top.first + top.second - jug1}])
-                    {
-                        q.push({jug1, top.first + top.second - jug1});
-                    }
-                }
-            }
-        }
-    }
-    return false;
-}
 
 bool bfs(int jug1, int jug2, pair<int, int> goal, map<pair<int, int>, bool> &visited_by_source, map<pair<int, int>, bool> &visited_by_goal)
 {
@@ -227,6 +120,7 @@ bool bfs(int jug1, int jug2, pair<int, int> goal, map<pair<int, int>, bool> &vis
         q_of_goal.pop();
         // cout << top_of_sorceQ.first << " " << top_of_sorceQ.second << "\n";
 
+        // if top of goalq is already visited by sourceq and goal is visited by both q then solution exis.
         if (visited_by_source[top_of_goalQ])
         {
             // cout << goal.first << " " << goal.second << "\n";
@@ -237,6 +131,7 @@ bool bfs(int jug1, int jug2, pair<int, int> goal, map<pair<int, int>, bool> &vis
                 return true;
             }
         }
+        // if top of sourceq is already visited by goalq and goal is visited by both q then solution exis.
         if (visited_by_goal[top_of_sorceQ])
         {
             // cout << goal.first << " " << goal.second << "\n";
@@ -248,6 +143,7 @@ bool bfs(int jug1, int jug2, pair<int, int> goal, map<pair<int, int>, bool> &vis
             }
         }
 
+        // if top is not visited then we may proceed further
         if (!visited_by_source[top_of_sorceQ])
         {
             visited_by_source[top_of_sorceQ] = true;

@@ -100,6 +100,7 @@ pair<int, int> visGoal = {-1, -1}, visSrc = {-1, -1};
 map<pair<int, int>, set<pair<int, int>>> generated_tree_childs;
 map<pair<int, int>, set<pair<int, int>>> generated_tree_parents;
 
+//generating tree
 void generateTree(int jug1, int jug2, pair<int, int> goal)
 {
     map<pair<int, int>, bool> visited;
@@ -268,9 +269,9 @@ void bfs2(map<pair<int, int>, set<pair<int, int>>> &generated_tree_childs, pair<
 int main()
 {
     FASTIO;
-    int jug1 = 10;
-    int jug2 = 15;
-    pair<int, int> goal = {5, 15};
+    int jug1 = 3;
+    int jug2 = 4;
+    pair<int, int> goal = {0, 2};
 
     generateTree(jug1, jug2, goal);
 
